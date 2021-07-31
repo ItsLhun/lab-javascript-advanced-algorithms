@@ -21,11 +21,15 @@ class Stack {
   }
 
   pop() {
-    // ... your code goes here
+    if (this.isEmpty()) {
+      throw new Error('STACK_UNDERFLOW');
+    } else {
+      this.stackControl.pop();
+    }
   }
 
   display() {
-    // ... your code goes here
+    return this.stackControl;
   }
 }
 
