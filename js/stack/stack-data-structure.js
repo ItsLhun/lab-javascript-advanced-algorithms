@@ -9,12 +9,13 @@ class Stack {
   }
 
   isEmpty() {
-    return this.stackControl.isEmpty();
+    return this.stackControl.length === 0;
   }
 
   push(item) {
     if (this.canPush()) {
       this.stackControl.push(item);
+      return this.stackControl;
     } else {
       throw new Error('STACK_OVERFLOW');
     }
@@ -24,7 +25,7 @@ class Stack {
     if (this.isEmpty()) {
       throw new Error('STACK_UNDERFLOW');
     } else {
-      this.stackControl.pop();
+      return this.stackControl.pop();
     }
   }
 

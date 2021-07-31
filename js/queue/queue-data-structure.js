@@ -9,12 +9,13 @@ class Queue {
   }
 
   isEmpty() {
-    return this.queueControl.isEmpty();
+    return this.queueControl.length === 0;
   }
 
   enqueue(item) {
     if (this.canEnqueue()) {
       this.queueControl.push(item);
+      return this.queueControl;
     } else {
       throw new Error('QUEUE_OVERFLOW');
     }
@@ -24,7 +25,7 @@ class Queue {
     if (this.isEmpty()) {
       throw new Error('QUEUE_UNDERFLOW');
     } else {
-      this.queueControl.splice(0,1);
+      return this.queueControl.splice(0,1)[0];
     }
   }
 
