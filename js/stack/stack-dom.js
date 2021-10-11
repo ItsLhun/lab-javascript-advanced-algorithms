@@ -30,17 +30,19 @@ const generateWarningStack = (type) => {
 
 const addToStack = () => {
   try {
-    // ... your code goes here
+    warningBottomStack.style.display = 'none';
+    newStack.push(stackInput.value);
   } catch (error) {
-    // there was an overflow error, handle it
+    warningTopStack.style.display = 'block';
   }
 };
 
 const removeFromStack = () => {
   try {
-    // ... your code goes here
+    warningTopStack.style.display = 'none';
+    newStack.pop()
   } catch (error) {
-    // there was an underflow error, handle it
+    warningBottomStack.style.display = 'block';
   }
 };
 
