@@ -11,20 +11,34 @@ const takeStackBtn = document.getElementById('take-stack');
 const newStack = new Stack();
 
 const clearStackInput = () => {
-  // ... your code goes here
+  stackInput.value = '';
 };
 
 const renderListStack = () => {
-  // ... your code goes here
+  clearStackInput();
+  stackList.innerHTML = '';
+  newStack.display().forEach((elem) => {
+    const newStackElement = document.createElement('li');
+    newStackElement.classList.add('active');
+    newStackElement.textContent = elem;
+    stackList.appendChild(newStackElement);
+  });
+  for (let i = 0; i < newStack.MAX_SIZE - newStack.display().length; i++) {
+    const newStackElement = document.createElement('li');
+    newStackElement.classList.add('inactive');
+    stackList.appendChild(newStackElement);
+  }
 };
 
 renderListStack();
 
 const generateWarningStack = (type) => {
-  if (type === 'underflow') {
-    // ... your code goes here
-  } else if (type === 'overflow') {
-    // ... your code goes here
+  if (type === 'STACK_OVERFLOW') {
+    warningTopStack.textContent = 'STACK OVERFLOW';
+    warningTopStack.style.display = 'block';
+  } else if (type === 'STACK_UNDERFLOW') {
+    warningBottomStack.textContent = 'STACK UNDERFLOW';
+    warningBottomStack.style.display = 'block';
   }
 };
 
@@ -32,17 +46,19 @@ const addToStack = () => {
   try {
     warningBottomStack.style.display = 'none';
     newStack.push(stackInput.value);
+    renderListStack();
   } catch (error) {
-    warningTopStack.style.display = 'block';
+    generateWarningStack(error.message);
   }
 };
 
 const removeFromStack = () => {
   try {
     warningTopStack.style.display = 'none';
-    newStack.pop()
+    newStack.pop();
+    renderListStack();
   } catch (error) {
-    warningBottomStack.style.display = 'block';
+    generateWarningStack(error.message);
   }
 };
 
